@@ -7,6 +7,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.condorhero89.nightguardian.receiver.SmsAndCallBroadcastReceiver;
+import com.condorhero89.nightguardian.util.RingerUtil;
+import com.condorhero89.nightguardian.util.RingerUtil.RingerMode;
 
 public class NightGuardianService extends Service {
     private static final String TAG = NightGuardianService.class.getSimpleName();
@@ -15,6 +17,8 @@ public class NightGuardianService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        RingerUtil.setRingerMode(this, RingerMode.SILENT);
+        
         initReceiver();
         
         return super.onStartCommand(intent, flags, startId);
@@ -27,10 +31,13 @@ public class NightGuardianService extends Service {
     
     @Override
     public void onDestroy() {
-        super.onDestroy();
         Log.d(TAG, "onDestroy");
         
+        RingerUtil.setRingerMode(this, RingerMode.NORMAL);
+        
         stopReceiver();
+        
+        super.onDestroy();
     }
     
     private void initReceiver() {
