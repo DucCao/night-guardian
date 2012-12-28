@@ -16,7 +16,7 @@ public class NightGuardianPreference {
     
     public static int getStartTime(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, 0);
-        return prefs.getInt("start-time", 0);
+        return prefs.getInt("start-time", 23);
     }
     
     public static void setStartMinute(Context context, int startMinute) {
@@ -40,7 +40,7 @@ public class NightGuardianPreference {
     
     public static int getStopTime(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, 0);
-        return prefs.getInt("stop-time", 0);
+        return prefs.getInt("stop-time", 7);
     }
     
     public static void setStopMinute(Context context, int stopMinute) {

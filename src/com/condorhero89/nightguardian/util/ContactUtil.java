@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
-import android.util.Log;
 
 import com.condorhero89.nightguardian.db.DatabaseHelper;
 import com.condorhero89.nightguardian.model.MyContact;
