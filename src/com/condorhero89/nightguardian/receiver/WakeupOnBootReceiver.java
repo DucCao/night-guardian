@@ -5,15 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.condorhero89.nightguardian.service.NightGuardianService;
+
 public class WakeupOnBootReceiver extends BroadcastReceiver {
-    private static final String TAG = "SMSBroadcastReceiver";
+    private static final String TAG = "WakeupOnBootReceiver";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Log.i(TAG, "Intent recieved: " + intent.getAction());
         
-        if (intent.getAction() == "android.intent.action.BOOT_COMPLETED") {
-            // TODO start the service NightGuardian
-        }
+        context.startService(new Intent(context, NightGuardianService.class));
 	}
 }
