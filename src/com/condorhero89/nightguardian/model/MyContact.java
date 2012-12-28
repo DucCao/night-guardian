@@ -16,4 +16,9 @@ public class MyContact {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "MyContact [phoneNumber=" + phoneNumber + ", name=" + name + "]";
+    }
 }

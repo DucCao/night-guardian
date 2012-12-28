@@ -9,7 +9,7 @@ import android.provider.ContactsContract;
 import com.condorhero89.nightguardian.model.MyContact;
 
 public class ContactUtil {
-    private static ArrayList<MyContact> mAllMyContacts = new ArrayList<MyContact>();
+    private static ArrayList<MyContact> mAllMyContacts = null;
 
     public static ArrayList<MyContact> getAllContacts(Context context) {
         if (ContactUtil.mAllMyContacts == null) {
@@ -34,7 +34,7 @@ public class ContactUtil {
     }
     
     public static boolean isAnImportantContact(String incomingPhoneNumber) {
-        // TODO check an incoming phone number to see whether it is important or not
+        // TODO check an incoming phone number to see whether it is important or not`
         return true;
     }
 }

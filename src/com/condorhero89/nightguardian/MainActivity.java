@@ -1,6 +1,7 @@
 package com.condorhero89.nightguardian;
 
 import com.condorhero89.nightguardian.service.NightGuardianService;
+import com.condorhero89.nightguardian.util.ContactUtil;
 
 import android.app.Activity;
 import android.content.Intent;
