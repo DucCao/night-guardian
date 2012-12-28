@@ -1,9 +1,13 @@
 package com.condorhero89.nightguardian;
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
@@ -22,7 +27,10 @@ import com.condorhero89.nightguardian.util.ContactUtil;
 import com.condorhero89.nightguardian.util.NightGuardianPreference;
 import com.condorhero89.nightguardian.util.TimerUtil;
 
+@TargetApi(17)
 public class MainActivity extends Activity {
+    
+    private TextView txtTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,9 @@ public class MainActivity extends Activity {
         
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        txtTimer = (TextView) findViewById(R.id.txtTimer);
+        showTimerText();
         
         ListView listView = (ListView) findViewById(R.id.listView);
         final MyContactAdapter adapter = new MyContactAdapter(this, ContactUtil.getAllContacts(getApplicationContext()));
@@ -53,6 +64,15 @@ public class MainActivity extends Activity {
         
         TimerUtil.startTimer(getApplicationContext());
         TimerUtil.stopTimer(getApplicationContext());
+    }
+    
+    private void showTimerText() {
+        txtTimer.setText(String.format("Start %dd:%dd, Stop %dd:%dd", 
+                NightGuardianPreference.getStartTime(getApplicationContext()),
+                NightGuardianPreference.getStartMinute(getApplicationContext()),
+                NightGuardianPreference.getStopTime(getApplicationContext()),
+                NightGuardianPreference.getStopMinute(getApplicationContext())
+        ));
     }
 
     @Override
@@ -101,6 +121,13 @@ public class MainActivity extends Activity {
         
         AlertDialog.Builder builder = new Builder(this);
         builder.setView(view);
+        builder.setOnDismissListener(new OnDismissListener() {
+            
+            @Override
+            public void onDismiss(DialogInterface arg0) {
+                showTimerText();
+            }
+        });
         builder.create().show();
     }
 }
