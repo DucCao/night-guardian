@@ -12,15 +12,13 @@ import com.condorhero89.nightguardian.service.NightGuardianStopperService;
 
 public class TimerUtil {
     private static final int ONE_DAY = 1000 * 60 * 60 * 24;
-    private static final int START_TIME = 16;
-    private static final int STOP_TIME = 17;
 
     public static void startTimer(Context context) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, START_TIME);
+        calendar.set(Calendar.HOUR_OF_DAY, NightGuardianPreference.getStartTime(context));
+        calendar.set(Calendar.MINUTE, NightGuardianPreference.getStartMinute(context));
         calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MINUTE, 0);
         
         Intent myIntent = new Intent(context, NightGuardianService.class);
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, myIntent, 0);
@@ -33,9 +31,10 @@ public class TimerUtil {
     public static void stopTimer(Context context) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, STOP_TIME);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, NightGuardianPreference.getStopTime(context));
+        calendar.set(Calendar.MINUTE, NightGuardianPreference.getStopMinute(context));
         calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MINUTE, 0);
         
         Intent myIntent = new Intent(context, NightGuardianStopperService.class);
         PendingIntent pendingIntent = PendingIntent.getService(context, 1, myIntent, 0);
