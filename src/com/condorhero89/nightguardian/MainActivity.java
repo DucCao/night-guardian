@@ -23,6 +23,7 @@ import com.condorhero89.nightguardian.adapter.MyContactAdapter;
 import com.condorhero89.nightguardian.model.MyContact;
 import com.condorhero89.nightguardian.util.ContactUtil;
 import com.condorhero89.nightguardian.util.NightGuardianPreference;
+import com.condorhero89.nightguardian.util.TimeFormatUtil;
 import com.condorhero89.nightguardian.util.TimerUtil;
 
 public class MainActivity extends Activity {
@@ -66,11 +67,11 @@ public class MainActivity extends Activity {
     }
     
     private void showTimerText() {
-        txtTimer.setText(String.format("Start %d:%d (today), Stop %d:%d (tomorrow)", 
-                NightGuardianPreference.getStartTime(getApplicationContext()),
-                NightGuardianPreference.getStartMinute(getApplicationContext()),
-                NightGuardianPreference.getStopTime(getApplicationContext()),
-                NightGuardianPreference.getStopMinute(getApplicationContext())
+        txtTimer.setText(String.format("Start %s:%s (today), Stop %s:%s (tomorrow)", 
+                TimeFormatUtil.getTimeFormat(NightGuardianPreference.getStartTime(getApplicationContext())),
+                TimeFormatUtil.getTimeFormat(NightGuardianPreference.getStartMinute(getApplicationContext())),
+                TimeFormatUtil.getTimeFormat(NightGuardianPreference.getStopTime(getApplicationContext())),
+                TimeFormatUtil.getTimeFormat(NightGuardianPreference.getStopMinute(getApplicationContext()))
         ));
     }
 
