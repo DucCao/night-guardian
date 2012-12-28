@@ -117,13 +117,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		ArrayList<MyContact> mAllImportantContacts = new ArrayList<MyContact>();
 		try {
 			if (cursor.moveToFirst()) {
-			    MyContact song = null;
-				int id = cursor.getColumnIndex("name");
-				int title = cursor.getColumnIndex("phone_number");
+			    MyContact myContact = null;
+				int phone = cursor.getColumnIndex("phone_number");
+				int name = cursor.getColumnIndex("name");
 				do {
-					song = new MyContact(cursor.getString(id), cursor.getString(title));
+					myContact = new MyContact(cursor.getString(phone), cursor.getString(name));
 					
-					mAllImportantContacts.add(song);
+					mAllImportantContacts.add(myContact);
 				} while (cursor.moveToNext());
 			}
 		} catch (Exception e) {

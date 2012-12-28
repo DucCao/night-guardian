@@ -1,5 +1,9 @@
 package com.condorhero89.nightguardian.receiver;
 
+import com.condorhero89.nightguardian.util.ContactUtil;
+import com.condorhero89.nightguardian.util.RingerUtil;
+import com.condorhero89.nightguardian.util.RingerUtil.RingerMode;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -87,7 +91,12 @@ public class SmsAndCallBroadcastReceiver extends BroadcastReceiver {
 			case TelephonyManager.CALL_STATE_RINGING:
                 Log.d("DEBUG", "RINGING");
                 
-                // TODO someone calling you
+                // someone's calling you
+                if (ContactUtil.isAnImportantContact(context, incomingNumber)) {
+                    RingerUtil.setRingerMode(context, RingerMode.NORMAL);
+                } else {
+                    RingerUtil.setRingerMode(context, RingerMode.SILENT);
+                }
                 
                 break;
                 
@@ -101,7 +110,8 @@ public class SmsAndCallBroadcastReceiver extends BroadcastReceiver {
 			case TelephonyManager.CALL_STATE_IDLE:
 				Log.d("DEBUG", "IDLE");
 				
-				// TODO the call is ended
+				// the call is ended
+				RingerUtil.setRingerMode(context, RingerMode.SILENT);
 				
 				break;
 			}

@@ -10,7 +10,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.condorhero89.nightguardian.adapter.MyContactAdapter;
-import com.condorhero89.nightguardian.db.DatabaseHelper;
 import com.condorhero89.nightguardian.model.MyContact;
 import com.condorhero89.nightguardian.service.NightGuardianService;
 import com.condorhero89.nightguardian.util.ContactUtil;
@@ -35,9 +34,9 @@ public class MainActivity extends Activity {
                 adapter.notifyDataSetChanged();
                 
                 if (myContact.isImportant()) {
-                    DatabaseHelper.getInstance(getApplicationContext()).insertImportantContact(myContact);
+                    ContactUtil.addImportContact(getApplicationContext(), myContact);
                 } else {
-                    DatabaseHelper.getInstance(getApplicationContext()).deleteImportantContact(myContact);
+                    ContactUtil.removeImportantContact(getApplicationContext(), myContact);
                 }
             }
         });

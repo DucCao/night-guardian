@@ -30,4 +30,9 @@ public class MyContact {
     public String toString() {
         return "MyContact [phoneNumber=" + phoneNumber + ", name=" + name + "]";
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        return this.phoneNumber.equals(((MyContact) o).phoneNumber);
+    }
 }
