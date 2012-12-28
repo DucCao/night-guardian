@@ -7,6 +7,10 @@
 
     <TextView
         android:id="@+id/txtTimer"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#f00"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

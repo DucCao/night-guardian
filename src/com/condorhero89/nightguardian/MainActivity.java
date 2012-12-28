@@ -27,7 +27,6 @@ import com.condorhero89.nightguardian.util.ContactUtil;
 import com.condorhero89.nightguardian.util.NightGuardianPreference;
 import com.condorhero89.nightguardian.util.TimerUtil;
 
-@TargetApi(17)
 public class MainActivity extends Activity {
     
     private TextView txtTimer;
@@ -67,7 +66,7 @@ public class MainActivity extends Activity {
     }
     
     private void showTimerText() {
-        txtTimer.setText(String.format("Start %dd:%dd, Stop %dd:%dd", 
+        txtTimer.setText(String.format("Start %d:%d, Stop %d:%d", 
                 NightGuardianPreference.getStartTime(getApplicationContext()),
                 NightGuardianPreference.getStartMinute(getApplicationContext()),
                 NightGuardianPreference.getStopTime(getApplicationContext()),
@@ -121,13 +120,14 @@ public class MainActivity extends Activity {
         
         AlertDialog.Builder builder = new Builder(this);
         builder.setView(view);
-        builder.setOnDismissListener(new OnDismissListener() {
+        AlertDialog dialog = builder.create(); 
+        dialog.setOnDismissListener(new OnDismissListener() {
             
             @Override
             public void onDismiss(DialogInterface arg0) {
                 showTimerText();
             }
         });
-        builder.create().show();
+        dialog.show();
     }
 }
