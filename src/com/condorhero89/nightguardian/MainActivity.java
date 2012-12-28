@@ -59,8 +59,10 @@ public class MainActivity extends Activity {
             }
         });
         
-        TimerUtil.startTimer(getApplicationContext());
-        TimerUtil.stopTimer(getApplicationContext());
+        boolean needStartService = TimerUtil.startTimer(getApplicationContext());
+        if (needStartService) {
+        	TimerUtil.stopTimer(getApplicationContext());
+        }
     }
     
     private void showTimerText() {

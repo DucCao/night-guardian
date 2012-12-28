@@ -13,7 +13,12 @@ import com.condorhero89.nightguardian.service.NightGuardianStopperService;
 public class TimerUtil {
     private static final int ONE_DAY = 1000 * 60 * 60 * 24;
 
-    public static void startTimer(Context context) {
+    public static boolean startTimer(Context context) {
+    	boolean isServiceRunning = ServiceUtil.isServiceRunning(context, NightGuardianService.class.getSimpleName());
+    	if (isServiceRunning) {
+    		return false;	// no need start service
+    	}
+    	
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, NightGuardianPreference.getStartTime(context));
@@ -26,6 +31,8 @@ public class TimerUtil {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), ONE_DAY, pendingIntent);
+        
+        return true;	// need start service
     }
     
     public static void stopTimer(Context context) {
