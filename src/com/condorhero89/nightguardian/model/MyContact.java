@@ -3,6 +3,7 @@ package com.condorhero89.nightguardian.model;
 public class MyContact {
     private String phoneNumber;
     private String name;
+    private boolean important;
     
     public MyContact(String phoneNumber, String name) {
         this.phoneNumber = phoneNumber;
@@ -15,6 +16,14 @@ public class MyContact {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isImportant() {
+        return important;
+    }
+
+    public void setImportant(boolean important) {
+        this.important = important;
     }
 
     @Override
