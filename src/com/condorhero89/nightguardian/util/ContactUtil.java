@@ -9,22 +9,32 @@ import android.provider.ContactsContract;
 import com.condorhero89.nightguardian.model.MyContact;
 
 public class ContactUtil {
+    private static ArrayList<MyContact> mAllMyContacts = new ArrayList<MyContact>();
 
     public static ArrayList<MyContact> getAllContacts(Context context) {
-        ArrayList<MyContact> mAllMyContacts = new ArrayList<MyContact>();
-        
-        Cursor mCursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
-        while (mCursor.moveToNext()) {
-            String name = mCursor.getString(mCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-            String phoneNumber = mCursor.getString(mCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            phoneNumber = phoneNumber.replace("-", "");
-            phoneNumber = phoneNumber.replace(" ", "");
-            phoneNumber = phoneNumber.substring(1);
+        if (ContactUtil.mAllMyContacts == null) {
+            ArrayList<MyContact> mAllMyContacts = new ArrayList<MyContact>();
             
-            mAllMyContacts.add(new MyContact(phoneNumber, name));
+            Cursor mCursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
+            while (mCursor.moveToNext()) {
+                String name = mCursor.getString(mCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                String phoneNumber = mCursor.getString(mCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                phoneNumber = phoneNumber.replace("-", "");
+                phoneNumber = phoneNumber.replace(" ", "");
+                phoneNumber = phoneNumber.substring(1);
+                
+                mAllMyContacts.add(new MyContact(phoneNumber, name));
+            }
+            mCursor.close();
+            
+            ContactUtil.mAllMyContacts = mAllMyContacts;
         }
-        mCursor.close();
         
-        return mAllMyContacts;
+        return ContactUtil.mAllMyContacts;
+    }
+    
+    public static boolean isAnImportantContact(String incomingPhoneNumber) {
+        // TODO check an incoming phone number to see whether it is important or not
+        return true;
     }
 }
