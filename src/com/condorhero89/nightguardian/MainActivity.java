@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
     }
     
     private void showTimerText() {
-        txtTimer.setText(String.format("Start %d:%d, Stop %d:%d", 
+        txtTimer.setText(String.format("Start %d:%d (today), Stop %d:%d (tomorrow)", 
                 NightGuardianPreference.getStartTime(getApplicationContext()),
                 NightGuardianPreference.getStartMinute(getApplicationContext()),
                 NightGuardianPreference.getStopTime(getApplicationContext()),
