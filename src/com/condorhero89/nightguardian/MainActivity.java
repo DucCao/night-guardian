@@ -2,8 +2,8 @@ package com.condorhero89.nightguardian;
 
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -11,13 +11,15 @@ import android.widget.ListView;
 
 import com.condorhero89.nightguardian.adapter.MyContactAdapter;
 import com.condorhero89.nightguardian.model.MyContact;
-import com.condorhero89.nightguardian.service.NightGuardianService;
 import com.condorhero89.nightguardian.util.ContactUtil;
+import com.condorhero89.nightguardian.util.TimerUtil;
 
 public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e("TEST", "start app");
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -41,12 +43,15 @@ public class MainActivity extends Activity {
             }
         });
         
-        startService(new Intent(getApplicationContext(), NightGuardianService.class));
+//        startService(new Intent(getApplicationContext(), NightGuardianService.class));
+        
+        TimerUtil.startTimer(getApplicationContext());
+        TimerUtil.stopTimer(getApplicationContext());
     }
 
     @Override
     protected void onDestroy() {
-        stopService(new Intent(getApplicationContext(), NightGuardianService.class));
+//        stopService(new Intent(getApplicationContext(), NightGuardianService.class));
         super.onDestroy();
     }
 

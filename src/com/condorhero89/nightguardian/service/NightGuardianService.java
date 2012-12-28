@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.condorhero89.nightguardian.receiver.SmsAndCallBroadcastReceiver;
 import com.condorhero89.nightguardian.util.RingerUtil;
+import com.condorhero89.nightguardian.util.TimerUtil;
 import com.condorhero89.nightguardian.util.RingerUtil.RingerMode;
 
 public class NightGuardianService extends Service {
@@ -17,6 +19,8 @@ public class NightGuardianService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Toast.makeText(this, "Service started", Toast.LENGTH_LONG).show();
+        
         RingerUtil.setRingerMode(this, RingerMode.SILENT);
         
         initReceiver();
@@ -31,7 +35,9 @@ public class NightGuardianService extends Service {
     
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy");
+        Toast.makeText(this, "Service stopped", Toast.LENGTH_LONG).show();
+        
+        Log.e(TAG, "onDestroy");
         
         RingerUtil.setRingerMode(this, RingerMode.NORMAL);
         
@@ -41,7 +47,7 @@ public class NightGuardianService extends Service {
     }
     
     private void initReceiver() {
-        Log.d(TAG, "initReceiver");
+        Log.e(TAG, "initReceiver");
         
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.provider.Telephony.SMS_RECEIVED");
