@@ -6,6 +6,8 @@ import android.content.SharedPreferences.Editor;
 
 public class NightGuardianPreference {
     private static String PREF_NAME = "night-guardian";
+    private static final int DEFAULT_START_TIME = 23;
+    private static final int DEFAULT_STOP_TIME = 7;
 
     public static void setStartTime(Context context, int startTime) {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, 0);
@@ -16,7 +18,7 @@ public class NightGuardianPreference {
     
     public static int getStartTime(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, 0);
-        return prefs.getInt("start-time", 23);
+        return prefs.getInt("start-time", DEFAULT_START_TIME);
     }
     
     public static void setStartMinute(Context context, int startMinute) {
@@ -40,7 +42,7 @@ public class NightGuardianPreference {
     
     public static int getStopTime(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, 0);
-        return prefs.getInt("stop-time", 7);
+        return prefs.getInt("stop-time", DEFAULT_STOP_TIME);
     }
     
     public static void setStopMinute(Context context, int stopMinute) {
