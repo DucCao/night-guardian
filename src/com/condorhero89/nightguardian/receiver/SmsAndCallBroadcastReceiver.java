@@ -37,9 +37,10 @@ public class SmsAndCallBroadcastReceiver extends BroadcastReceiver {
 
         if (phoneListener == null) {
         	phoneListener = new MyPhoneStateListener(context);
-        	TelephonyManager telephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        	telephony.listen(phoneListener, PhoneStateListener.LISTEN_CALL_STATE);
         }
+        
+        TelephonyManager telephony = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+    	telephony.listen(phoneListener, PhoneStateListener.LISTEN_CALL_STATE);
 
         if (intent.getAction() == SMS_RECEIVED) {
             Bundle bundle = intent.getExtras();
