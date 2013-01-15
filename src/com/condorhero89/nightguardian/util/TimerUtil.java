@@ -49,4 +49,16 @@ public class TimerUtil {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), ONE_DAY, pendingIntent);
     }
+    
+    public static void cancel(Context context) {
+    	AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    	
+    	Intent myIntent = new Intent(context, NightGuardianService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(context, 0, myIntent, 0);
+        alarmManager.cancel(pendingIntent);
+        
+        myIntent = new Intent(context, NightGuardianStopperService.class);
+        pendingIntent = PendingIntent.getService(context, 1, myIntent, 0);
+        alarmManager.cancel(pendingIntent);
+    }
 }

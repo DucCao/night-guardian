@@ -77,14 +77,22 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("Timer");
-//        menu.add("Stop the guardian");
+    	menu.add(0, 0, 0, "Timer");
+    	menu.add(0, 1, 0, "Stop the guardian");
         return super.onCreateOptionsMenu(menu);
     }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        showTimerDialog();
+    	if (item.getItemId() == 0) {
+    		showTimerDialog();
+    	} else if (item.getItemId() == 1) {
+    		TimerUtil.cancel(getApplicationContext());
+    		
+    		// TODO stop the service
+    		
+    		// TODO set the text
+    	}
         return super.onOptionsItemSelected(item);
     }
 
